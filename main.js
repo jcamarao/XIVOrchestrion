@@ -17,7 +17,7 @@ let currentExpansionZones = []
 let currentZone
 let currentTime
 let manualDay
-let isDay
+let isNight
 
 /*
  *
@@ -26,8 +26,7 @@ let isDay
 */
 
 /* change the current music if a new selection was made on the expansion list */
-function updateSong(currentExpansion) {
-    console.log("now playing music from: " + currentExpansion)
+function updateExpansion(currentExpansion) {
     currentExpansionZones = []
     switch (currentExpansion) {
         case "arr": 
@@ -68,7 +67,8 @@ function updateUI() {
 /* continuously check on time for day/night music */
 function checkTime() {
     currentTime = new Date().getHours()
-    currentTime >=6 && currentTime <= 18 ? isDay = true : isDay = false
-    console.log("checkTime:" + isDay)
+    currentTime >=18 && currentTime < 6  ? isNight = true : isNight = false
+    console.log("current hour: " + currentTime)
+    console.log("checkTime" + ": " + isNight)
 }
 setInterval(checkTime, 1000)
