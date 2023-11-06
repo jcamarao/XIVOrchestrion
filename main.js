@@ -1,5 +1,5 @@
 // Baseline URL for requests
-const baseURL = 'fill in later'
+const baseURL = "https://d3o089717konbo.cloudfront.net"
 
 // load in the data for music information mapping
 const arrData = [{"name":"Wailers and Waterwheels","zone":"Gridania","time":"Day"},{"name":"Dance of the Fireflies","zone":"Gridania","time":"Night"},{
@@ -8,6 +8,10 @@ const arrData = [{"name":"Wailers and Waterwheels","zone":"Gridania","time":"Day
         "name":"Frontiers Within","zone":"Mor Dhona","time":"Day"},{"name":"Reflections","zone":"Mor Dhona","time":"Night"},
         {"name":"Serenity","zone":"The Black Shroud Field Theme","time":"Both"},{"name":"To the Sun","zone":"Thanalan Field Theme","time":"Both"},{
             "name":"On Westerly Winds","zone":"La Noscea Field Theme","time":"Both"}]
+const hwData = []
+const sbData = []
+const shbData = []
+const ewData = []
 
 // music/logic tracking 
 let currentSong = "Not Playing"
@@ -73,59 +77,42 @@ browser.storage.local.set({"isPlaying": isPlaying})
  * 
  */ 
 
+
 /*
  *
  * UPDATE FUNCTIONS
  * 
 */
 
-/* change the current music if a new selection was made on the expansion list */
-// function updateExpansion(currentExpansion) {
-//     let selectId = "expansionSelect"
-//     switch (currentExpansion) {
-//         case "arr": 
-//         // currentExpansionSongs = JSON.parse(arrData); 
-//             updateUI(selectId, currentExpansion)
-//             break
-//         case "hw":
-//             updateUI(selectId, currentExpansion)
-//             break
-//         case "sb":
-//             updateUI(selectId, currentExpansion)
-//             break
-//         case "shb":
-//             updateUI(selectId, currentExpansion)
-//             break
-//         case "ew":
-//             updateUI(selectId, currentExpansion)
-//             break
-//     }
-// }
 
-// /* update the song currently playing and update the UI to fit accordingly */
-// function updateSong(currentExpansionSongs) {
-//     // get the song based on index 0 of array of objects
-//     // play it
-//     // save info for updating ui
-//     currentSong = currentExpansionSongs[0].Name
-//     currentZone = currentExpansionSongs[0].Zone
-//     updateUI(currentSong, currentZone)
-// }
+// TODO TODO TODO TODO TODO
 
-// /* updates the popup to display to live selection/song */
-// function updateUI(id, changeToValue) {
-//     switch (id) {
-//         case "currentSong":
-//             document.getElementById("currentSong").innerHTML = changeToValue
-//             break
-//         case "currentZone":
-//             document.getElementById("currentZone").innerHTML = changeToValue
-//             break
-//         case "expansionSelect":
-//             document.getElementById("expansionSelect").value = changeToValue
-//             break
-//     }
-// }
+/* keep track of the changing variables in local storage and modify if new option is selected */
+function listener(itemChanged) {
+    const changedItems = Object.keys(itemChanged);
+    for (const item of changedItems) {
+        switch (item) {
+            case "isNight":
+                /* 
+                 * when isNight changes:
+                 * 2. grab the new songs based on isNight and add them to songsToPlay
+                 * 3. adjust the current song playing to first item in songsToPlay
+                 * 4. change the ui to match the current song playing
+                 */
+                !(itemChanged[item].oldValue == itemChanged[item].newValue) ? console.log("isNight Changed") : console.log("isNight did not Change")
+                break
+            case "expansion":
+                /* 
+                 * when expansion changes:
+                 * 1. change currentExpansionSongs to the new expansion
+                 * 2. grab the new songs based on isNight and add them to songsToPlay
+                 * 3. adjust the current song playing to first item in songsToPlay
+                 * 4. change the ui to match the current song playing
+                 */
+        }
+    }
+}  
+browser.storage.local.onChanged.addListener(listener)
 
 /* continuously check on time for day/night time requirement */
 function checkTime() {

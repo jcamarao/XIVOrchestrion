@@ -1,10 +1,34 @@
+/*
+ *
+ * refreshers to pull current info from local storage
+ * 
+*/ 
+
+/* obtain and update the value for the current song zone */
+browser.storage.local.get("songZone", (item) => {
+    document.getElementById("currentZone").innerHTML = item.songZone
+})
+
+/* obtain and update the value for the current song name */
+browser.storage.local.get("songName", (item) => {
+    document.getElementById("currentSong").innerHTML = item.songName
+})
+
+/* obtain and update the value for the current expansion */
+browser.storage.local.get("expansion", (item) => {
+    document.getElementById("expansionSelect").value = item.expansion
+})
+
+/*
+ *
+ * event listeners to save (and or update) the settings and music
+ * 
+*/ 
+
 /* obtain and update the value for the current expansion */
 document.getElementById("expansionSelect").addEventListener("change", function() {
-    browser.storage.local.set({"expansion": this.value});
-    browser.storage.local.get("expansion", (item) => {
-        currentExpansion = item.expansion
-        updateExpansion(currentExpansion)
-    })
+    browser.storage.local.set({"expansion": expansionSelect.value})
+    updateMusic()
 })
 
 /* obtain and update the value if it's day/night based on the 6/6 EZT time cycle
@@ -13,17 +37,29 @@ document.getElementById("expansionSelect").addEventListener("change", function()
  */
  document.getElementById("dayNightToggle").addEventListener("change", function(event) {
     browser.storage.local.get("expansion", (item) => {
-        currentExpansion = item.expansion
-        updateExpansion(currentExpansion)
+        document.getElementById("dayNightToggle").checked = item.value
     })
 })
 
 /* set the toggle accordingly to current time when opening pop-up */
-if (isNight) {
-    console.log(isNight)
-    document.getElementById("dayNightToggle").checked = true
-}
-else {
-    console.log(isNight)
-    document.getElementById("dayNightToggle").checked = false
+browser.storage.local.get("isNight", (item) => {
+    item.isNight ? document.getElementById("dayNightToggle").checked = true : document.getElementById("dayNightToggle").checked = false
+})
+
+
+/*
+ *
+ * update function when changing expansions
+ * 
+*/ 
+function updateMusic() {
+    // update UI to have the new song info
+    browser.storage.local.get("songZone", (item) => {
+        document.getElementById("currentZone").innerHTML = item.songZone
+    })
+    
+    /* obtain and update the value for the current song name */
+    browser.storage.local.get("songName", (item) => {
+        document.getElementById("currentSong").innerHTML = item.songName
+    })
 }
