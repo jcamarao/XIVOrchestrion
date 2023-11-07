@@ -28,7 +28,6 @@ browser.storage.local.get("expansion", (item) => {
 /* obtain and update the value for the current expansion */
 document.getElementById("expansionSelect").addEventListener("change", function() {
     browser.storage.local.set({"expansion": expansionSelect.value})
-    updateMusic()
 })
 
 /* obtain and update the value if it's day/night based on the 6/6 EZT time cycle
@@ -46,7 +45,6 @@ browser.storage.local.get("isNight", (item) => {
     item.isNight ? document.getElementById("dayNightToggle").checked = true : document.getElementById("dayNightToggle").checked = false
 })
 
-
 /*
  *
  * update function when changing expansions
@@ -63,3 +61,19 @@ function updateMusic() {
         document.getElementById("currentSong").innerHTML = item.songName
     })
 }
+
+function listener(itemChanged) {
+    const changedItems = Object.keys(itemChanged);
+    for (const item of changedItems) {
+        console.log(item)
+        switch (item) {
+            case "songName":
+                document.getElementById("currentSong").innerHTML = itemChanged[item].newValue
+                break
+            case "songZone":
+                document.getElementById("currentZone").innerHTML = itemChanged[item].newValue
+                break
+        }
+    }
+}
+browser.storage.local.onChanged.addListener(listener)
