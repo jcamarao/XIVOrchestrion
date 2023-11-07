@@ -47,25 +47,12 @@ browser.storage.local.get("isNight", (item) => {
 
 /*
  *
- * update function when changing expansions
+ * listener to update live while having the extension open
  * 
 */ 
-function updateMusic() {
-    // update UI to have the new song info
-    browser.storage.local.get("songZone", (item) => {
-        document.getElementById("currentZone").innerHTML = item.songZone
-    })
-    
-    /* obtain and update the value for the current song name */
-    browser.storage.local.get("songName", (item) => {
-        document.getElementById("currentSong").innerHTML = item.songName
-    })
-}
-
 function listener(itemChanged) {
     const changedItems = Object.keys(itemChanged);
     for (const item of changedItems) {
-        console.log(item)
         switch (item) {
             case "songName":
                 document.getElementById("currentSong").innerHTML = itemChanged[item].newValue

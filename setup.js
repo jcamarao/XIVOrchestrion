@@ -1,5 +1,5 @@
 /* check if default local storage variables are set and adjust accordingly */ 
-
+// this should only run once
 if (isNight == undefined) {
     // set the default for time
     currentTime = new Date().getHours()
