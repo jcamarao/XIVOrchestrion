@@ -13,7 +13,7 @@
         "default_popup": "popup.html"
       },
     "background": {
-        "scripts": [ "main.js", "setup.js", "howler.js" ]
+        "scripts": [ "howler.js", "main.js", "setup.js", "listener.js"]
     },
     "permissions": [
         "storage"

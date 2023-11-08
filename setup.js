@@ -40,4 +40,24 @@ if (isNight == undefined) {
     browser.storage.local.set({"manual": manualControl})
     // set the default for music state
     browser.storage.local.set({"isPlaying": isPlaying})
+
+    browser.storage.local.get("songName", (item) => {
+        // set up song 
+        urlAppropriateName = item.songName
+        urlAppropriateName = urlAppropriateName.replaceAll(' ', '+')
+        urlAppropriateName = urlAppropriateName.replaceAll(',', "%2C")
+        let songUrl = `${baseURL}/${currentExpansion}/${urlAppropriateName}.ogg`
+        currentSong = new Howl({
+            src: [songUrl],
+            html5: true,
+            volume: 0,
+            // Fires when the sound finishes playing.
+            onend: () => {
+                currentSong.shift()
+            },
+            onpause: () => {
+                console.log("song has been paused")
+            },
+        })
+    })
 }

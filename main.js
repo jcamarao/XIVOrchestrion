@@ -38,7 +38,7 @@ const shbData = [{"name":"The Dark Which Illuminates the World","zone":"The Crys
 {"name":"The Faerie Ring","zone":"Il Mheg","time":"Night"},{"name":"Civilizations","zone":"The Rak\'Tika Greatwood","time":"Day"},
 {"name":"A Hopeless Race","zone":"The Rak\'Tika Greatwood","time":"Night"},{"name":"Full Fathom Five","zone":"The Tempest","time":"Both"}
 ,{"name":"Indulgence","zone":"Eulmore","time":"Day"},{"name":"Masquerade","zone":"Eulmore","time":"Night"},
-{"name":"Neath Dark Waters","zone":"The Tempest (Amaurot)","time":"Both"},
+{"name":"'Neath Dark Waters","zone":"The Tempest (Amaurot)","time":"Both"},
 {"name":"Whisper of the Land","zone":"Sanctuary","time":"Both"},{"name":"A Reason to Live","zone":"Sanctuary","time":"Both"},
 {"name":"Such as it Is","zone":"Sanctuary","time":"Both"},{"name":"No Greater Sorrow","zone":"Sanctuary","time":"Both"}]
 const ewData = [{"name":"The Ewer Brimmeth","zone":"Old Sharlayan","time":"Day"},{"name":"The Nautilus Knoweth","zone":"Old Sharlayan","time":"Night"},
@@ -53,114 +53,111 @@ const ewData = [{"name":"The Ewer Brimmeth","zone":"Old Sharlayan","time":"Day"}
 {"name":"Vibrant Voices","zone":"Rad-At-Han","time":"Day"},{"name":"Perfumed Eves","zone":"Radz-At-Han","time":"Night"}]
 
 // music/logic tracking 
-let currentSong = "Not Playing"
+let howlSource
+let currentSong
 let isPlaying = false
 let manualControl = false
 let currentTime
+const fade = 100
+let volume = 1.0
+let urlAppropriateName
 
 // default values
 let currentExpansion = "arr"
 let currentExpansionSongs = arrData
 let currentSongs = []
-let currentZone = "None"
 let isNight 
 
 /*
  *
- * UPDATE FUNCTIONS
+ * music handling functions
  * 
-*/
+*/ 
 
-
-// TODO TODO TODO TODO TODO
-// change curent playing and figure out audio playing with howler
-
-/* keep track of the changing variables in local storage and modify if new option is selected */
-function listener(itemChanged) {
-    const changedItems = Object.keys(itemChanged);
-    for (const item of changedItems) {
-        switch (item) {
-            case "isNight":
-                /* 
-                 * when isNight changes:
-                 * 2. grab the new songs based on isNight and add them to songsToPlay
-                 * 3. adjust the current song playing to first item in songsToPlay
-                 */
-                if (!(itemChanged[item].oldValue == itemChanged[item].newValue)) {
-                    currentSongs = []
-                    if (isNight) {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Night" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    } else {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Day" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
+function playSong(songArray) {
+    isPlaying = true
+    urlAppropriateName = songArray[0].name
+    urlAppropriateName = urlAppropriateName.replaceAll(' ', '+')
+    urlAppropriateName = urlAppropriateName.replaceAll(',', "%2C")
+    let songUrl = `${baseURL}/${currentExpansion}/${urlAppropriateName}.ogg`
+    if (currentSong.playing()) {
+        currentSong.unload()
+        howlSource = songArray[0].name
+        currentSong = new Howl({
+            src: [songUrl],
+            html5: true,
+            volume: 0,
+            // Fires when the sound finishes playing.
+            onend: () => {
+                songArray.shift()
+                browser.storage.local.set({"songsToPlay": songArray}) 
+                currentSong.unload()
+            },
+            onpause: () => {
+                console.log("song has been paused")
+            }
+          })
+        currentSong.play()
+        currentSong.fade(0, volume, fade)
+    }
+    else if (currentSong.state() == "loaded" || currentSong.state() == "loading") {
+        browser.storage.local.get("songName", (item) => {
+            if (howlSource != item.songName) {
+                currentSong.unload()
+                howlSource = songArray[0].name
+                currentSong = new Howl({
+                    src: [songUrl],
+                    html5: true,
+                    volume: 0,
+                    // Fires when the sound finishes playing.
+                    onend: () => {
+                        songArray.shift()
+                        browser.storage.local.set({"songsToPlay": songArray}) 
+                        currentSong.unload()
+                    },
+                    onpause: () => {
+                        console.log("song has been paused")
                     }
-                    currentSongs = currentSongs.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
-                    browser.storage.local.set({"songsToPlay": currentSongs}) 
-                    browser.storage.local.set({"songZone": currentSongs[0].zone})
-                    browser.storage.local.set({"songName": currentSongs[0].name})
-                }
-                break
-            case "expansion":
-                /* 
-                 * when expansion changes:
-                 * 1. change currentExpansionSongs to the new expansion
-                 * 2. grab the new songs based on isNight and add them to songsToPlay
-                 * 3. adjust the current song playing to first item in songsToPlay
-                 */
-                browser.storage.local.get("expansion", (item) => {
-                    switch (item.expansion) {
-                        case "arr":
-                            currentExpansionSongs = arrData
-                            currentSongs = []
-                            break
-                        case "hw":
-                            currentExpansionSongs = hwData
-                            currentSongs = []
-                            break
-                        case "sb":
-                            currentExpansionSongs = sbData
-                            currentSongs = []
-                            break
-                        case "shb":
-                            currentExpansionSongs = shbData
-                            currentSongs = []
-                            break
-                        case "ew":
-                            currentExpansionSongs = ewData
-                            currentSongs = []
-                            break
-                    }
-                    browser.storage.local.set({"currentExpansionSongs": currentExpansionSongs})
-                    if (isNight) {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Night" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    } else {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Day" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    }
-                    currentSongs = currentSongs.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
-                    browser.storage.local.set({"songsToPlay": currentSongs}) 
-                    browser.storage.local.set({"songZone": currentSongs[0].zone})
-                    browser.storage.local.set({"songName": currentSongs[0].name})
-                })
-                break
-        }
+                  })
+                currentSong.play()
+                currentSong.fade(0, volume, fade)
+            }
+            else {
+                currentSong.play()
+                currentSong.fade(0, volume, fade)
+            }
+        })
+    }
+    else {
+        howlSource = currentSongs[0].name
+        currentSong = new Howl({
+            src: [songUrl],
+            htlm5: true,
+            volume: 0,
+            // Fires when the sound finishes playing.
+            onend: () => {
+                songArray.shift()
+                browser.storage.local.set({"songsToPlay": songArray}) 
+                currentSong.unload()
+            },
+            onpause: () => {
+                console.log("song has been paused")
+            },
+          })
+        currentSong.play()
+        currentSong.fade(0, volume, fade)
     }
 }
-browser.storage.local.onChanged.addListener(listener)
+
+function pauseSong() {
+    isPlaying = false
+    if (currentSong == undefined) {
+    }
+    else {
+        currentSong.fade(volume, 0, fade)
+        currentSong.pause()
+    }
+}
 
 /* continuously check on time for day/night time requirement */
 function checkTime() {

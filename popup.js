@@ -19,11 +19,33 @@ browser.storage.local.get("expansion", (item) => {
     document.getElementById("expansionSelect").value = item.expansion
 })
 
+/* obtain and update the value if music is playing or not */
+browser.storage.local.get("isPlaying", (item) => {
+    if (item.isPlaying) {
+        document.getElementById("playButton").src = "docs/pause.png"
+    }
+    else {
+        document.getElementById("playButton").src = "docs/play.png"
+    }
+})
+
 /*
  *
  * event listeners to save (and or update) the settings and music
  * 
 */ 
+
+/* obtain and update the value for the current expansion */
+document.getElementById("songButton").addEventListener("click", function() {
+    browser.storage.local.get("isPlaying", (item) => {
+        if (item.isPlaying) {
+            browser.storage.local.set({"isPlaying": false})
+        }
+        else {
+            browser.storage.local.set({"isPlaying": true})
+        }
+    })
+})
 
 /* obtain and update the value for the current expansion */
 document.getElementById("expansionSelect").addEventListener("change", function() {
@@ -60,6 +82,13 @@ function listener(itemChanged) {
             case "songZone":
                 document.getElementById("currentZone").innerHTML = itemChanged[item].newValue
                 break
+            case "isPlaying":
+                if (itemChanged[item].newValue) {
+                    document.getElementById("playButton").src = "docs/pause.png"
+                }
+                else {
+                    document.getElementById("playButton").src = "docs/play.png"
+                }
         }
     }
 }
