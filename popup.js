@@ -35,7 +35,7 @@ browser.storage.local.get("isPlaying", (item) => {
  * 
 */ 
 
-/* obtain and update the value for the current expansion */
+/* obtain and update the value for if musicis playing or not */
 document.getElementById("songButton").addEventListener("click", function() {
     browser.storage.local.get("isPlaying", (item) => {
         if (item.isPlaying) {
@@ -43,6 +43,18 @@ document.getElementById("songButton").addEventListener("click", function() {
         }
         else {
             browser.storage.local.set({"isPlaying": true})
+        }
+    })
+})
+
+/* obtain and update the value for if musicis playing or not */
+document.getElementById("loopButton").addEventListener("click", function() {
+    browser.storage.local.get("isLooping", (item) => {
+        if (item.isLooping) {
+            browser.storage.local.set({"isLooping": false})
+        }
+        else {
+            browser.storage.local.set({"isLooping": true})
         }
     })
 })

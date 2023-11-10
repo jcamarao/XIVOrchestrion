@@ -1,25 +1,27 @@
 // TODO TODO TODO TODO TODO
-// 
-// FUTURE ME: TEST PLAY SONG AUTOMATICALLY AFTER DONE, IF IT DOESN'T WORK, DO #1
-//
-// 1. listen for songName change and check if isPlaying, if true playSong()
-// 2. save current time in song, if paused then play from paused time in song
+//  
+// 1. work on volume bar
 //
 
 /* keep track of the changing variables in local storage and modify if new option is selected */
 function listener(itemChanged) {
     const changedItems = Object.keys(itemChanged);
     for (const item of changedItems) {
-        switch (item) {
+        switch (item) { 
             case "songsToPlay":
+                browser.storage.local.get("songsToPlay", (item) => {
+                    if (item.songsToPlay.length == 0) {
+                        createSongList()
+                        browser.storage.local.set({"songsToPlay": currentSongs})
+                    }
+                })
                 browser.storage.local.get("isPlaying", (state) => {
                     if (state.isPlaying) {
-                        howlSource = currentSongs[0].name
                         browser.storage.local.set({"songName": currentSongs[0].name})
                         browser.storage.local.set({"songZone": currentSongs[0].zone})
                         playSong(currentSongs)
                     }
-                    })
+                })
                 break
             case "isNight":
                 /* 
@@ -29,20 +31,7 @@ function listener(itemChanged) {
                  */
                 if (!(itemChanged[item].oldValue == itemChanged[item].newValue)) {
                     currentSongs = []
-                    if (isNight) {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Night" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    } else {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Day" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    }
-                    currentSongs = currentSongs.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+                    createSongList()
                     browser.storage.local.set({"songsToPlay": currentSongs})
                     browser.storage.local.set({"songName": currentSongs[0].name})
                     browser.storage.local.set({"songZone": currentSongs[0].zone})
@@ -82,22 +71,18 @@ function listener(itemChanged) {
                             currentExpansionSongs = ewData
                             currentSongs = []
                             break
+                        case "all":
+                            currentExpansion = "all"
+                            currentExpansionSongs = arrData
+                            currentExpansionSongs = currentExpansionSongs.concat(hwData)
+                            currentExpansionSongs = currentExpansionSongs.concat(sbData)
+                            currentExpansionSongs = currentExpansionSongs.concat(shbData)
+                            currentExpansionSongs = currentExpansionSongs.concat(ewData)
+                            currentSongs = []
+                            break
                     }
                     browser.storage.local.set({"currentExpansionSongs": currentExpansionSongs})
-                    if (isNight) {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Night" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    } else {
-                        for (let song of currentExpansionSongs) {
-                            if (song.time == "Day" || song.time == "Both") {
-                                currentSongs.push(song)
-                            }
-                        }
-                    }
-                    currentSongs = currentSongs.map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value)
+                    createSongList() 
                     browser.storage.local.set({"songsToPlay": currentSongs}) 
                     browser.storage.local.set({"songZone": currentSongs[0].zone})
                     browser.storage.local.set({"songName": currentSongs[0].name})
@@ -118,6 +103,10 @@ function listener(itemChanged) {
                 }
                 })
                 break
+            case "isLooping":
+                browser.storage.local.get("isLooping", (item) => {
+                    isLooping = item.isLooping
+                })
         }
     }
 }

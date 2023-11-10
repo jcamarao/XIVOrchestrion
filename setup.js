@@ -36,13 +36,14 @@ if (isNight == undefined) {
     browser.storage.local.set({"songZone": currentSongs[0].zone})
     // set the default for expansion
     browser.storage.local.set({"songName": currentSongs[0].name})
-    // set the default for manual control
-    browser.storage.local.set({"manual": manualControl})
     // set the default for music state
     browser.storage.local.set({"isPlaying": isPlaying})
+    // set the default for looping state
+    browser.storage.local.set({"isLooping": isLooping})
 
     browser.storage.local.get("songName", (item) => {
         // set up song 
+        howlSource = currentSongs[0]
         urlAppropriateName = item.songName
         urlAppropriateName = urlAppropriateName.replaceAll(' ', '+')
         urlAppropriateName = urlAppropriateName.replaceAll(',', "%2C")
@@ -53,11 +54,16 @@ if (isNight == undefined) {
             volume: 0,
             // Fires when the sound finishes playing.
             onend: () => {
-                currentSong.shift()
-            },
-            onpause: () => {
-                console.log("song has been paused")
-            },
+                if (isLooping) {
+                    currentSong.play()
+                    currentSong.fade(0, volume, fade)
+                }
+                else {
+                    songArray.shift()
+                    browser.storage.local.set({"songsToPlay": songArray}) 
+                    currentSong.unload()
+                }
+            }
         })
     })
 }

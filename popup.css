@@ -28,6 +28,18 @@ h1 {
     width: 30px;
     height: 30px;
 }
+#loopButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+#loopTrigger {
+    width: 30px;
+    height: 30px;
+}
 /* The switch - the box around the slider */
 .switch {
     position: relative;
