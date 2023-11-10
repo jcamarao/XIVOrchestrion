@@ -19,13 +19,23 @@ browser.storage.local.get("expansion", (item) => {
     document.getElementById("expansionSelect").value = item.expansion
 })
 
-/* obtain and update the value if music is playing or not */
+/* obtain and update the image if music is playing or not */
 browser.storage.local.get("isPlaying", (item) => {
     if (item.isPlaying) {
         document.getElementById("playButton").src = "docs/pause.png"
     }
     else {
         document.getElementById("playButton").src = "docs/play.png"
+    }
+})
+
+/* obtain and update the image if music is looping or not */
+browser.storage.local.get("isLooping", (item) => {
+    if (item.isLooping) {
+        document.getElementById("loopTrigger").src = "docs/loopOn.png"
+    }
+    else {
+        document.getElementById("loopTrigger").src = "docs/loopOff.png"
     }
 })
 
@@ -64,11 +74,6 @@ document.getElementById("expansionSelect").addEventListener("change", function()
     browser.storage.local.set({"expansion": expansionSelect.value})
 })
 
-/* set the toggle accordingly to current time when opening pop-up */
-browser.storage.local.get("isNight", (item) => {
-    item.isNight ? document.getElementById("dayNightToggle").checked = true : document.getElementById("dayNightToggle").checked = false
-})
-
 /*
  *
  * listener to update live while having the extension open
@@ -91,6 +96,15 @@ function listener(itemChanged) {
                 else {
                     document.getElementById("playButton").src = "docs/play.png"
                 }
+                break
+            case "isLooping":
+                if (itemChanged[item].newValue) {
+                    document.getElementById("loopTrigger").src = "docs/loopOn.png"
+                }
+                else {
+                    document.getElementById("loopTrigger").src = "docs/loopOff.png"
+                }
+                break
         }
     }
 }
