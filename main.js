@@ -57,7 +57,7 @@ let isLooping = false
 let isPlaying = false
 let currentTime
 const fade = 100
-let volume = 1.0
+let volume = 0.50
 let urlAppropriateName
 
 // default values

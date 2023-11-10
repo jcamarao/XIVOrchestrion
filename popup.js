@@ -19,6 +19,11 @@ browser.storage.local.get("expansion", (item) => {
     document.getElementById("expansionSelect").value = item.expansion
 })
 
+/* obtain and update the value for the volume */
+browser.storage.local.get("volume", (item) => {
+    document.getElementById("volume").value = item.volume
+})
+
 /* obtain and update the image if music is playing or not */
 browser.storage.local.get("isPlaying", (item) => {
     if (item.isPlaying) {
@@ -44,6 +49,18 @@ browser.storage.local.get("isLooping", (item) => {
  * event listeners to save (and or update) the settings and music
  * 
 */ 
+
+/* obtain and update the value for if musicis playing or not */
+document.getElementById("volume").addEventListener("change", function() {
+    browser.storage.local.get("volume", (item) => { 
+        browser.storage.local.set({"volume": volume.value})
+    })
+})
+document.getElementById("volume").addEventListener("input", function() {
+    browser.storage.local.get("volume", (item) => { 
+        browser.storage.local.set({"volume": volume.value})
+    })
+})
 
 /* obtain and update the value for if musicis playing or not */
 document.getElementById("songButton").addEventListener("click", function() {

@@ -40,6 +40,8 @@ if (isNight == undefined) {
     browser.storage.local.set({"isPlaying": isPlaying})
     // set the default for looping state
     browser.storage.local.set({"isLooping": isLooping})
+    // set the default for volume
+    browser.storage.local.set({"volume": volume})
 
     browser.storage.local.get("songName", (item) => {
         // set up song 

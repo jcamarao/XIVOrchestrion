@@ -107,6 +107,11 @@ function listener(itemChanged) {
                 browser.storage.local.get("isLooping", (item) => {
                     isLooping = item.isLooping
                 })
+            case "volume":
+                browser.storage.local.get("volume", (item) => {
+                    volume = item.volume
+                    currentSong.volume(volume)
+                })
         }
     }
 }
