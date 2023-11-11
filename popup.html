@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<meta charset="utf-8">
+<link rel="stylesheet" href="popup.css">
+<html>
+    <div id="popup">
+        <div id="header">
+            <h1>XIVOrchestrion</h1>
+        </div>
+        <div id="main">
+            <h2>Expansion to listen to:</h2>
+            <div class="selectMenu">
+                <select id="expansionSelect">
+                    <option value="arr">A Realm Reborn</option>
+                    <option value="hw">Heavensward</option>
+                    <option value="sb">Stormblood</option>
+                    <option value="shb">Shadowbringers</option>
+                    <option value="ew">Endwalker</option>
+                    <option value="all">All Expansions</option>
+                </select>
+            </div>
+            <h2>Current Zone:</h2>
+            <span id="currentZone">No Expansion Selected.</span>
+            <h2>Now Playing:</h2>
+            <span id="currentSong">No Expansion Selected.</span>
+            <div>
+                <button type="button" id="songButton">
+                    <img id="playButton" src="docs/play.png">
+                </button>
+                <input type="range" id="volume" min="0.00" max="1.00" step="0.05" defaultValue="0.50"/>
+                <button type="button" id="loopButton">
+                    <img id="loopTrigger" src="docs/loopOff.png">
+                </button>
+            </div>
+        </div>
+        <div id="footer">
+            <a href="https://github.com/jcamarao/XIVOrchestrion" target="_blank">Github</a>
+        </div>
+    </div>
+</html>
+
+<script src="popup.js"></script>

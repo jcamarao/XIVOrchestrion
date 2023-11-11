@@ -1,0 +1,65 @@
+html {
+    font-family: "Roboto";
+    background-color: #97c498;
+    margin: 0 auto;
+}
+#popup {
+    padding: 0.1rem 1rem;
+    border-radius: 10px;
+    width: 250px;
+    height: 400px;
+    text-align: center;
+    align-items: center;
+}
+#header {
+    margin: 0 auto;
+    width: 250px;
+}
+#main {
+    margin: 0 auto;
+    width: 250px;
+    height: 320px;
+}
+#footer {
+    margin: 0 auto;
+    width: 250px;
+}
+h1 {
+    color: #000000;
+    font-size: 20px;
+    font-style: bold;
+} 
+select#expansionSelect {
+    text-align: center;
+    font-size: 20px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    display:inline-block;
+}
+#songButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+#playButton {
+    width: 30px;
+    height: 30px;
+}
+#loopButton {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+#loopTrigger {
+    width: 30px;
+    height: 30px;
+}
