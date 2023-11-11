@@ -10,7 +10,7 @@ FINAL FANTASY XIV © 2010-2023 SQUARE ENIX CO., LTD. All Rights Reserved.
 
 # Making Edits
 If you want to modify it or change how something works, do the following:
-1. Clone the github repo with `git clone git@github.com:jcamarao/XIVOrchestrion.git` or download the repo as a .zip
+1. Clone the github repo with `git clone git@github.com:jcamarao/XIVOrchestrion.git`, fork, or download the repo as a .zip
 2. In Firefox, type in `about:debugging#/runtime/this-firefox` into the URL
 3. Click on `Load Temporary Add-on...` and load the `manifest.json`
 4. Begin working!
