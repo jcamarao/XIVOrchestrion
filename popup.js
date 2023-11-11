@@ -17,6 +17,10 @@ browser.storage.local.get("songName", (item) => {
 /* obtain and update the value for the current expansion */
 browser.storage.local.get("expansion", (item) => {
     document.getElementById("expansionSelect").value = item.expansion
+    switch (item.expansion) {
+        case "arr":
+            
+    }
 })
 
 /* obtain and update the value for the volume */
