@@ -48,6 +48,16 @@ browser.storage.local.get("isLooping", (item) => {
     }
 })
 
+/* obtain and update the image if it's night or not */
+browser.storage.local.get("isNight", (item) => {
+    if (item.isNight) {
+        document.getElementById("timeIcon").src = "docs/moon.png"
+    }
+    else {
+        document.getElementById("timeIcon").src = "docs/sun.png"
+    }
+})
+
 /*
  *
  * event listeners to save (and or update) the settings and music
@@ -124,6 +134,14 @@ function listener(itemChanged) {
                 }
                 else {
                     document.getElementById("loopTrigger").src = "docs/loopOff.png"
+                }
+                break
+            case "isNight":
+                if (itemChanged[item].newValue) {
+                    document.getElementById("timeIcon").src = "docs/moon.png"
+                }
+                else {
+                    document.getElementById("timeIcon").src = "docs/sun.png"
                 }
                 break
         }

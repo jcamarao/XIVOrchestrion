@@ -1,10 +1,13 @@
 html {
     font-family: "Roboto";
-    background-color: #97c498;
+    background-color: #2D2E2C;
+    color: #D5C193;
     margin: 0 auto;
+    border-radius: 5px;
+    border: 3px solid #B39845;
 }
 #popup {
-    padding: 0.1rem 1rem;
+    color: #D5C193;
     border-radius: 10px;
     width: 250px;
     height: 400px;
@@ -12,32 +15,60 @@ html {
     align-items: center;
 }
 #header {
-    margin: 0 auto;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #D5C193;
     width: 250px;
 }
 #main {
     margin: 0 auto;
     width: 250px;
-    height: 320px;
+    height: 298px;
 }
-#footer {
-    margin: 0 auto;
+#songArea {
     width: 250px;
+    padding-bottom: 10px;
+}
+#songControl {
+    position: absolute;
 }
 h1 {
-    color: #000000;
-    font-size: 20px;
+    color: #D5C193;
+    font-size: 25px;
     font-style: bold;
-} 
-select#expansionSelect {
+}
+#timeIcon {
+    padding-right: 90px;
+    width: 30px;
+    height: 30px;
+}
+#github {
+    padding-left: 85px;
+    width: 30px;
+    height: 30px;
+}
+.p {
+    font-size: 35px;
+}
+#expansionSelect {
+    color: #D5C193;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid transparent;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     background-color: transparent;
     background-repeat: no-repeat;
-    border: none;
     overflow: hidden;
     outline: none;
-    display:inline-block;
+    transition: border-bottom 1s ease-in-out;
+}
+#expansionSelect:hover {
+    border-bottom: 2px solid #D5C193;
 }
 #songButton {
     background-color: transparent;
@@ -45,7 +76,7 @@ select#expansionSelect {
     border: none;
     cursor: pointer;
     overflow: hidden;
-    outline: none;
+    outline: none; 
 }
 #playButton {
     width: 30px;
@@ -62,4 +93,58 @@ select#expansionSelect {
 #loopTrigger {
     width: 30px;
     height: 30px;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 150px;
+    background-color: transparent;
+    &:focus {
+      outline-color: #f8b195;
+    }
+}
+input[type="range"]::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: #D5C193;
+    /* background: rgb(246, 114, 128); */
+    /* background: -moz-linear-gradient(
+      left,
+      rgba(246, 114, 128, 1) 0%,
+      rgba(192, 108, 132, 1) 50%,
+      rgba(53, 92, 125, 1) 100%
+    );
+    background: linear-gradient(
+      to right,
+      rgba(246, 114, 128, 1) 0%,
+      rgba(192, 108, 132, 1) 50%,
+      rgba(53, 92, 125, 1) 100%
+    ); */
+    filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="#f67280",
+      endColorstr="#355c7d",
+      GradientType=1
+    );
+}
+input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    /* border: 2px solid #f8b195; */
+    border: 2px solid #D5C193;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    bottom: 8px;
+    background: #222
+      url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png")
+      center no-repeat;
+    background-size: 50%;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
 }
