@@ -6,12 +6,12 @@
 
 /* obtain and update the value for the current song zone */
 browser.storage.local.get("songZone", (item) => {
-    document.getElementById("currentZone").innerHTML = item.songZone
+    document.getElementById("currentZone").innerText = item.songZone
 })
 
 /* obtain and update the value for the current song name */
 browser.storage.local.get("songName", (item) => {
-    document.getElementById("currentSong").innerHTML = item.songName
+    document.getElementById("currentSong").innerText = item.songName
 })
 
 /* obtain and update the value for the current expansion */
@@ -111,10 +111,10 @@ function listener(itemChanged) {
     for (const item of changedItems) {
         switch (item) {
             case "songName":
-                document.getElementById("currentSong").innerHTML = itemChanged[item].newValue
+                document.getElementById("currentSong").innerText = itemChanged[item].newValue
                 break
             case "songZone":
-                document.getElementById("currentZone").innerHTML = itemChanged[item].newValue
+                document.getElementById("currentZone").innerText = itemChanged[item].newValue
                 break
             case "isPlaying":
                 if (itemChanged[item].newValue) {
