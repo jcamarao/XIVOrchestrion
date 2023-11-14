@@ -17,10 +17,6 @@ browser.storage.local.get("songName", (item) => {
 /* obtain and update the value for the current expansion */
 browser.storage.local.get("expansion", (item) => {
     document.getElementById("expansionSelect").value = item.expansion
-    switch (item.expansion) {
-        case "arr":
-            
-    }
 })
 
 /* obtain and update the value for the volume */
@@ -48,6 +44,16 @@ browser.storage.local.get("isLooping", (item) => {
     }
 })
 
+/* obtain and update the image if it's night or not */
+browser.storage.local.get("isNight", (item) => {
+    if (item.isNight) {
+        document.getElementById("timeIcon").src = "docs/moon.png"
+    }
+    else {
+        document.getElementById("timeIcon").src = "docs/sun.png"
+    }
+})
+
 /*
  *
  * event listeners to save (and or update) the settings and music
@@ -55,19 +61,19 @@ browser.storage.local.get("isLooping", (item) => {
 */ 
 
 /* obtain and update the value for if musicis playing or not */
-document.getElementById("volume").addEventListener("change", function() {
-    browser.storage.local.get("volume", (item) => { 
+document.getElementById("volume").addEventListener("change", () => {
+    browser.storage.local.get("volume", () => { 
         browser.storage.local.set({"volume": volume.value})
     })
 })
-document.getElementById("volume").addEventListener("input", function() {
-    browser.storage.local.get("volume", (item) => { 
+document.getElementById("volume").addEventListener("input", () => {
+    browser.storage.local.get("volume", () => { 
         browser.storage.local.set({"volume": volume.value})
     })
 })
 
 /* obtain and update the value for if musicis playing or not */
-document.getElementById("songButton").addEventListener("click", function() {
+document.getElementById("songButton").addEventListener("click", () => {
     browser.storage.local.get("isPlaying", (item) => {
         if (item.isPlaying) {
             browser.storage.local.set({"isPlaying": false})
@@ -79,7 +85,7 @@ document.getElementById("songButton").addEventListener("click", function() {
 })
 
 /* obtain and update the value for if musicis playing or not */
-document.getElementById("loopButton").addEventListener("click", function() {
+document.getElementById("loopButton").addEventListener("click", () => {
     browser.storage.local.get("isLooping", (item) => {
         if (item.isLooping) {
             browser.storage.local.set({"isLooping": false})
@@ -91,7 +97,7 @@ document.getElementById("loopButton").addEventListener("click", function() {
 })
 
 /* obtain and update the value for the current expansion */
-document.getElementById("expansionSelect").addEventListener("change", function() {
+document.getElementById("expansionSelect").addEventListener("change", () => {
     browser.storage.local.set({"expansion": expansionSelect.value})
 })
 
@@ -124,6 +130,14 @@ function listener(itemChanged) {
                 }
                 else {
                     document.getElementById("loopTrigger").src = "docs/loopOff.png"
+                }
+                break
+            case "isNight":
+                if (itemChanged[item].newValue) {
+                    document.getElementById("timeIcon").src = "docs/moon.png"
+                }
+                else {
+                    document.getElementById("timeIcon").src = "docs/sun.png"
                 }
                 break
         }

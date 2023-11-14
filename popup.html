@@ -7,7 +7,7 @@
             <h1>XIVOrchestrion</h1>
         </div>
         <div id="main">
-            <h2>Expansion to listen to:</h2>
+            <p>Current Expansion:</p>
             <div class="selectMenu">
                 <select id="expansionSelect">
                     <option value="arr">A Realm Reborn</option>
@@ -18,22 +18,25 @@
                     <option value="all">All Expansions</option>
                 </select>
             </div>
-            <h2>Current Zone:</h2>
-            <span id="currentZone">No Expansion Selected.</span>
-            <h2>Now Playing:</h2>
-            <span id="currentSong">No Expansion Selected.</span>
-            <div>
+            <div id="songArea">
+                <p>Current Zone:</p>
+                <span id="currentZone">No Expansion Selected.</span>
+                <p>Now Playing:</p>
+                <span id="currentSong">No Expansion Selected.</span>
+            </div>
+            <input type="range" id="volume" min="0.00" max="1.00" step="0.05" defaultValue="0.50"/>
+            <div id="SongControl"></div>
                 <button type="button" id="songButton">
                     <img id="playButton" src="docs/play.png">
                 </button>
-                <input type="range" id="volume" min="0.00" max="1.00" step="0.05" defaultValue="0.50"/>
                 <button type="button" id="loopButton">
                     <img id="loopTrigger" src="docs/loopOff.png">
                 </button>
             </div>
         </div>
         <div id="footer">
-            <a href="https://github.com/jcamarao/XIVOrchestrion" target="_blank">Github</a>
+            <img id="timeIcon" src="docs/sun.png">
+            <a href="https://github.com/jcamarao/XIVOrchestrion" target="_blank"><img id="github" src="docs/github.png"></a>
         </div>
     </div>
 </html>

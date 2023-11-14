@@ -1,43 +1,95 @@
+/*
+ * background: #313031 
+ * border: #b7802b #af7a29 #a5926b #b49847
+ * text: #f1d79d #fffec1 #f3e6af #dcc99c
+*/
+
 html {
-    font-family: "Roboto";
-    background-color: #97c498;
+    /* font-family: "Roboto"; */
+    background-color: #313031;
+    color: #fffec1;
     margin: 0 auto;
+    border-radius: 5px;
+    border: 3px solid #b49847;
 }
 #popup {
-    padding: 0.1rem 1rem;
+    color: #fffec1;
     border-radius: 10px;
     width: 250px;
-    height: 400px;
     text-align: center;
     align-items: center;
 }
 #header {
-    margin: 0 auto;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #fffec1;
     width: 250px;
+    margin: 0 auto;
+    padding: 0 auto;
 }
 #main {
     margin: 0 auto;
     width: 250px;
-    height: 320px;
+    height: 200px;
 }
 #footer {
-    margin: 0 auto;
+    padding-top: 40px;
     width: 250px;
+    display: flex;
+    justify-content: center;
+}
+#songArea {
+    width: 250px;
+    padding-bottom: 10px;
+}
+#songControl {
+    margin-top: 0 auto;
+    position: absolute;
+    display: flex;
+    justify-content: center;
 }
 h1 {
-    color: #000000;
-    font-size: 20px;
+    color: #fffec1;
+    font-size: 25px;
     font-style: bold;
-} 
-select#expansionSelect {
-    text-align: center;
+}
+#timeIcon {
+    padding-right: 90px;
+    width: 30px;
+    height: 30px;
+}
+#github {
+    padding-left: 85px;
+    width: 30px;
+    height: 30px;
+}
+p {
     font-size: 20px;
+    margin: 15px 0px auto; 
+}
+#expansionSelect {
+    position: relative;
+    color: #fffec1;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    font-size: 15px;
     background-color: transparent;
     background-repeat: no-repeat;
-    border: none;
     overflow: hidden;
     outline: none;
-    display:inline-block;
+    transition: border-bottom 1s ease-in-out;
+}
+#expansionSelect:hover {
+    border-bottom: 2px solid #fffec1;
+}
+select option {
+    color: #313031;
 }
 #songButton {
     background-color: transparent;
@@ -45,7 +97,7 @@ select#expansionSelect {
     border: none;
     cursor: pointer;
     overflow: hidden;
-    outline: none;
+    outline: none; 
 }
 #playButton {
     width: 30px;
@@ -62,4 +114,38 @@ select#expansionSelect {
 #loopTrigger {
     width: 30px;
     height: 30px;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 150px;
+    background-color: transparent;
+    &:focus {
+      outline-color: #fffec1;
+    }
+}
+input[type="range"]::-moz-range-track {
+    -moz-appearance: none;
+    appearance: none;
+    height: 3px;
+    background: #fffec1;
+}
+input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    /* border: 2px solid #f8b195; */
+    border: 2px solid #fffec1;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    position: relative;
+    bottom: 8px;
+    background: #313031;
+    background-size: 50%;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
 }

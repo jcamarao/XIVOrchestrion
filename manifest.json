@@ -2,8 +2,13 @@
     "manifest_version": 2,
     "name":"XIVOrchestrion", 
     "version":"1.0.0", 
-    "description": "XIVOrchestrion is an extension that plays Final Fantasy XIV night/day themes depending your system's time.",
-    "author": "Jake Camarao",
+    "description": "XIVOrchestrion is an extension that brings Final Fantasy XIV night/day themes to your browser depending your system's time.",
+    "author": "Jake",
+    "browser_specific_settings": {
+        "gecko": {
+          "id": "xiv@orchestrion.play"
+        }
+    },
     "icons": {
         "128": "icons/128.png"
     },

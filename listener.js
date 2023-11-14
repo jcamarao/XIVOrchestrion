@@ -1,8 +1,3 @@
-// TODO TODO TODO TODO TODO
-//  
-// 1. work on volume bar
-//
-
 /* keep track of the changing variables in local storage and modify if new option is selected */
 function listener(itemChanged) {
     const changedItems = Object.keys(itemChanged);
