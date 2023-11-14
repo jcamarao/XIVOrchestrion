@@ -3,7 +3,7 @@
 if (isNight == undefined) {
     // set the default for time
     currentTime = new Date().getHours()
-    currentTime >=18 && !(currentTime < 6)  ? isNight = true : isNight = false
+    currentTime >=18 || currentTime < 6 ? isNight = true : isNight = false
     browser.storage.local.set({"isNight": isNight})
 
     // set the defaults for the expansion

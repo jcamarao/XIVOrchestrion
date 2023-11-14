@@ -5,7 +5,7 @@ const baseURL = "https://d3o089717konbo.cloudfront.net"
 const arrData = [{"name":"Wailers and Waterwheels","zone":"Gridania","time":"Day","expansion":"arr"},
 {"name":"Dance of the Fireflies","zone":"Gridania","time":"Night","expansion":"arr"},
 {"name":"A New Hope","zone":"Ul\'Dah","time":"Day","expansion":"arr"},{"name":"Sultana Dreaming","zone":"Ul\'Dah","time":"Night","expansion":"arr"},
-{"name":"I Am the Sea","zone":"Limsa Lominsa","time":"Day","expansion":"arr"},{"name":"A Sailor Never Sleep","zone":"Limsa Lominsa","time":"Night","expansion":"arr"},
+{"name":"I Am the Sea","zone":"Limsa Lominsa","time":"Day","expansion":"arr"},{"name":"A Sailor Never Sleeps","zone":"Limsa Lominsa","time":"Night","expansion":"arr"},
 {"name":"Frontiers Within","zone":"Mor Dhona","time":"Day","expansion":"arr"},{"name":"Reflections","zone":"Mor Dhona","time":"Night","expansion":"arr"},
 {"name":"Serenity","zone":"The Black Shroud Field Theme","time":"Both","expansion":"arr"},{"name":"To the Sun","zone":"Thanalan Field Theme","time":"Both","expansion":"arr"},
 {"name":"On Westerly Winds","zone":"La Noscea Field Theme","time":"Both","expansion":"arr"},{"name":"Salt Swept","zone":"Sanctuary Theme","time":"Both","expansion":"arr"},
@@ -187,7 +187,7 @@ function createSongList() {
 /* continuously check on time for day/night time requirement */
 function checkTime() {
     currentTime = new Date().getHours()
-    currentTime >=18 && !(currentTime < 6) ? isNight = true : isNight = false
+    currentTime >=18 || currentTime < 6 ? isNight = true : isNight = false
     browser.storage.local.set({"isNight": isNight})
 }
 setInterval(checkTime, 1000)

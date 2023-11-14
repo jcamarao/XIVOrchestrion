@@ -24,11 +24,11 @@
                 <p>Now Playing:</p>
                 <span id="currentSong">No Expansion Selected.</span>
             </div>
-            <div id="SongControl">
+            <input type="range" id="volume" min="0.00" max="1.00" step="0.05" defaultValue="0.50"/>
+            <div id="SongControl"></div>
                 <button type="button" id="songButton">
                     <img id="playButton" src="docs/play.png">
                 </button>
-                <input type="range" id="volume" min="0.00" max="1.00" step="0.05" defaultValue="0.50"/>
                 <button type="button" id="loopButton">
                     <img id="loopTrigger" src="docs/loopOff.png">
                 </button>
@@ -36,7 +36,7 @@
         </div>
         <div id="footer">
             <img id="timeIcon" src="docs/sun.png">
-            <a><img id="github" href="https://github.com/jcamarao/XIVOrchestrion" target="_blank" src="docs/github.png"></a>
+            <a href="https://github.com/jcamarao/XIVOrchestrion" target="_blank"><img id="github" src="docs/github.png"></a>
         </div>
     </div>
 </html>

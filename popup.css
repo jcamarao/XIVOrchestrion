@@ -1,16 +1,21 @@
+/*
+ * background: #313031 
+ * border: #b7802b #af7a29 #a5926b #b49847
+ * text: #f1d79d #fffec1 #f3e6af #dcc99c
+*/
+
 html {
-    font-family: "Roboto";
-    background-color: #2D2E2C;
-    color: #D5C193;
+    /* font-family: "Roboto"; */
+    background-color: #313031;
+    color: #fffec1;
     margin: 0 auto;
     border-radius: 5px;
-    border: 3px solid #B39845;
+    border: 3px solid #b49847;
 }
 #popup {
-    color: #D5C193;
+    color: #fffec1;
     border-radius: 10px;
     width: 250px;
-    height: 400px;
     text-align: center;
     align-items: center;
 }
@@ -20,23 +25,34 @@ html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #D5C193;
+    color: #fffec1;
     width: 250px;
+    margin: 0 auto;
+    padding: 0 auto;
 }
 #main {
     margin: 0 auto;
     width: 250px;
-    height: 298px;
+    height: 200px;
+}
+#footer {
+    padding-top: 40px;
+    width: 250px;
+    display: flex;
+    justify-content: center;
 }
 #songArea {
     width: 250px;
     padding-bottom: 10px;
 }
 #songControl {
+    margin-top: 0 auto;
     position: absolute;
+    display: flex;
+    justify-content: center;
 }
 h1 {
-    color: #D5C193;
+    color: #fffec1;
     font-size: 25px;
     font-style: bold;
 }
@@ -50,11 +66,13 @@ h1 {
     width: 30px;
     height: 30px;
 }
-.p {
-    font-size: 35px;
+p {
+    font-size: 20px;
+    margin: 15px 0px auto; 
 }
 #expansionSelect {
-    color: #D5C193;
+    position: relative;
+    color: #fffec1;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -68,7 +86,10 @@ h1 {
     transition: border-bottom 1s ease-in-out;
 }
 #expansionSelect:hover {
-    border-bottom: 2px solid #D5C193;
+    border-bottom: 2px solid #fffec1;
+}
+select option {
+    color: #313031;
 }
 #songButton {
     background-color: transparent;
@@ -101,46 +122,26 @@ input[type="range"] {
     width: 150px;
     background-color: transparent;
     &:focus {
-      outline-color: #f8b195;
+      outline-color: #fffec1;
     }
 }
 input[type="range"]::-moz-range-track {
     -moz-appearance: none;
     appearance: none;
     height: 3px;
-    background: #D5C193;
-    /* background: rgb(246, 114, 128); */
-    /* background: -moz-linear-gradient(
-      left,
-      rgba(246, 114, 128, 1) 0%,
-      rgba(192, 108, 132, 1) 50%,
-      rgba(53, 92, 125, 1) 100%
-    );
-    background: linear-gradient(
-      to right,
-      rgba(246, 114, 128, 1) 0%,
-      rgba(192, 108, 132, 1) 50%,
-      rgba(53, 92, 125, 1) 100%
-    ); */
-    filter: progid:DXImageTransform.Microsoft.gradient(
-      startColorstr="#f67280",
-      endColorstr="#355c7d",
-      GradientType=1
-    );
+    background: #fffec1;
 }
 input[type="range"]::-moz-range-thumb {
     -moz-appearance: none;
     appearance: none;
     /* border: 2px solid #f8b195; */
-    border: 2px solid #D5C193;
+    border: 2px solid #fffec1;
     border-radius: 50%;
     height: 15px;
     width: 15px;
     position: relative;
     bottom: 8px;
-    background: #222
-      url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png")
-      center no-repeat;
+    background: #313031;
     background-size: 50%;
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
     cursor: grab;
