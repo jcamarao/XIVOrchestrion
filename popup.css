@@ -89,7 +89,8 @@ p {
     border-bottom: 2px solid #fffec1;
 }
 select option {
-    color: #313031;
+    background-color: #313031;
+    color: #fffec1;
 }
 #songButton {
     background-color: transparent;
