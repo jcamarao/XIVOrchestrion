@@ -1,4 +1,6 @@
 # XIVOrchestrion
+[Firefox Extension Page](https://addons.mozilla.org/en-US/firefox/addon/xivorchestrion/)
+
 XIVOrchestrion is a Firefox extension that tracks your system's time to determine if it's day or night (according to EZT standards), and allows you to pick an expansion and play the themes from the overworld while you browse. Made with manifest v2 due to the manifest v3 changes with persistent scripts. 
 
 I highly encourage you to buy the tracks. They're amazing.
