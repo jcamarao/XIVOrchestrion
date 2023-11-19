@@ -16,7 +16,7 @@ https://github.com/jcamarao/XIVOrchestrion/assets/54694264/87428ce5-bc53-440b-a8
 
 
 
-XIVOrchestrion works by utilizing the browsers local storage by using `browser.storage.local` to keep track of states with listeners running in the background to keep things updated without needing the extension UI open. It also uses AWS CloudFront and S3 as the method of audio distribution to quickly load the themes regardless of where the user is located globally.
+XIVOrchestrion works by utilizing the browsers local storage by using `browser.storage.local` to keep track of states with listeners running in the background to keep things updated without needing the extension UI open. To easily load/play/pause the audio, I used [Howler.js](https://howlerjs.com/). For audio distribution, XIVOrchestrion uses AWS CloudFront and S3 to quickly load the music regardless of where the user is located globally.
 
 # Disclaimer
 This is a passion project and is not affiliated with Square Enix. I do **NOT** own the audio.
