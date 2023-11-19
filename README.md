@@ -9,6 +9,11 @@ You can find them here: [A Realm Reborn](https://na.store.square-enix-games.com/
 
 Inspired by [Nook](https://addons.mozilla.org/en-US/firefox/addon/nook). A big thank you to everyone who helped me test it and assist in creating the icons. :)
 
+# How it Works
+[![](https://markdown-videos-api.jorgenkh.no/youtube/{382Mt75p2X8})](https://youtu.be/382Mt75p2X8)
+
+XIVOrchestrion works by utilizing the browsers local storage by using `browser.storage.local` to keep track of states with listeners running in the background to keep things updated without needing the extension UI open. It also uses AWS CloudFront and S3 as the method of audio distribution to quickly load the themes regardless of where the user is located globally.
+
 # Disclaimer
 This is a passion project and is not affiliated with Square Enix. I do **NOT** own the audio.
 
